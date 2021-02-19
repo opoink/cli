@@ -1,13 +1,14 @@
 {
     "name": "opoink/cli",
-    "description": "",
+    "description": "opoink cli",
     "keywords": ["opoink", "opoink cli"],
     "homepage": "https://github.com/opoink/cli",
     "license": "MIT",
     "type": "library",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-           "Opoink\\Cli": "src/"
+            "Opoink\\Cli\\": "src/"
         }
     },
     "require": {

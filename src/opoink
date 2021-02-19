@@ -1,0 +1,25 @@
+<?php
+
+defined('DS') ? null : define("DS", DIRECTORY_SEPARATOR);
+defined('ROOT') ? null : define("ROOT", dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+
+include ROOT . '/vendor/autoload.php';
+
+$di = \DI\ContainerBuilder::buildDevContainer();
+$params = $di->get('\Opoink\Cli\Request\Param');
+
+/**
+ * start to execute the command
+ */
+$result = [
+    'error' => 1,
+    'message' => '',
+    'data' => null
+];
+try {
+    $di->get($params->nameSpace);
+} catch (\Exception $e) {
+    $result['message'] = 'Caught exception: ' .  $e->getMessage();
+}
+echo json_encode($result);
+?>
