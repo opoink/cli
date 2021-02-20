@@ -14,10 +14,26 @@ $params = $di->get('\Opoink\Cli\Request\Param');
 $result = [
     'error' => 1,
     'message' => '',
+    'methods' => [],
     'data' => null
 ];
 try {
-    $di->get($params->nameSpace);
+    $action = $params->action;
+    $nameSpace = $params->nameSpace;
+    $object = $di->get($nameSpace);
+
+    if( method_exists($object, $action) ){
+        $r = $object->$action();
+
+        if($r){
+            $result = $r;
+        } else {
+            $result['error'] = 0;
+        }
+    } else {
+        $result['message'] = 'Caught exception: Method does not exist.';
+        $result['methods'] = get_class_methods($object);
+    }
 } catch (\Exception $e) {
     $result['message'] = 'Caught exception: ' .  $e->getMessage();
 }
