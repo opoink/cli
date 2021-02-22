@@ -1,4 +1,8 @@
 <?php
+/**
+* Copyright 2021 Opoink Framework (http://opoink.com/)
+* Licensed under MIT, see LICENSE.md
+*/
 namespace Opoink\Cli\Request;
 
 class Param {
